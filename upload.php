@@ -27,8 +27,8 @@ if ($_FILES['userfile']['error'] == 0) {
 //ошибка перемещения файла
         if (!$upload) {
             $_SESSION['movefile_message'] = 'Ошибка. Не возможно сохранить файл';
-//            header('Location: index.php');
-//            exit;
+            header('Location: index.php');
+            exit;
         }
 //устанавливаем права на файл
         chmod(UPLOAD_DIR . $name, 0644);
@@ -36,17 +36,17 @@ if ($_FILES['userfile']['error'] == 0) {
         Photo_Upload($name, $title);
         createThumbnail(UPLOAD_DIR . $name, UPLOAD_DIR . 'small/' . $name, 100, 100, [255,255,255]);
         $_SESSION['movefile_message'] = 'Файл успешно загружен';
-//        header('Location: index.php');
-//        exit;
+        header('Location: index.php');
+        exit;
     } else {
         //ошибка - не верный формат файла
         $_SESSION['movefile_message'] = 'Ошибка. Файл должен быть с расширением JPG, JPEG, PNG, GIF';
-//        header('Location: index.php');
-//        exit;
+        header('Location: index.php');
+        exit;
     }
 } else {
     //ошибка из формы
     $_SESSION['movefile_message'] = checkUpload();
-//    header('Location: index.php');
-//    exit;
+    header('Location: index.php');
+    exit;
 }

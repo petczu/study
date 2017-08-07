@@ -9,4 +9,3 @@ $host = 'localhost';
 $user = 'root';
 $password = '';
 $database = 'gallery';
-$dbhost = mysqli_connect($host, $user, $password, $database);

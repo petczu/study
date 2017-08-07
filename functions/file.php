@@ -44,3 +44,37 @@ function createThumbnail($filepath, $thumbpath, $thumbnail_width, $thumbnail_hei
     $imgt($new_image, $thumbpath);
     return file_exists($thumbpath);
 }
+//функция проверки загрузки и вывода сообщения со статусом
+function checkUpload(){
+    $upload_message = $_FILES['userfile']['error'];
+    switch ($upload_message) {
+        case 0:
+            $message = 'OK';
+            break;
+        case 1:
+            $message = "Размер принятого файла превысил максимально допустимый размер, который задан директивой upload_max_filesize конфигурационного файла php.ini.";
+            break;
+        case 2:
+            $message = "Размер загружаемого файла превысил значение MAX_FILE_SIZE, указанное в HTML-форме.";
+            break;
+        case 3:
+            $message = "Загружаемый файл был получен только частично.";
+            break;
+        case 4:
+            $message = "Файл не был загружен.";
+            break;
+        case 6:
+            $message = "Отсутствует временная папка.";
+            break;
+        case 7:
+            $message = "Не удалось записать файл на диск.";
+            break;
+        case 8:
+            $message = "PHP-расширение остановило загрузку файла. PHP не предоставляет способа определить какое расширение остановило загрузку файла; в этом может помочь просмотр списка загруженных расширений из phpinfo().";
+            break;
+        default:
+            $message = "Unknown upload error";
+            break;
+    }
+    return $message;
+}
